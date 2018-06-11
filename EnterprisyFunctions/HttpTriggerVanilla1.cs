@@ -16,6 +16,7 @@ namespace EnterprisyFunctions
         [FunctionName("HttpTriggerVanilla1")]
         public static IActionResult Run([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)]HttpRequest req, TraceWriter log)
         {
+
             log.Info("C# HTTP trigger function processed a request.");
 
             string name = req.Query["name"];
@@ -24,8 +25,10 @@ namespace EnterprisyFunctions
             dynamic data = JsonConvert.DeserializeObject(requestBody);
             name = name ?? data?.name;
 
+
+
             return name != null
-                ? (ActionResult)new OkObjectResult($"Hello, {name.CleanUp()}")
+                ? (ActionResult)new OkObjectResult($"Hello, {name.CleanUp()}. Environment: {System.Environment.GetEnvironmentVariable("Environment")}")
                 : new BadRequestObjectResult("Please pass a name on the query string or in the request body");
         }
     }
