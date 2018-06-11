@@ -9,9 +9,9 @@ using Newtonsoft.Json;
 
 namespace EnterprisyFunctions
 {
-    public static class Function1
+    public static class HttpTriggerVanilla1
     {
-        [FunctionName("Function1")]
+        [FunctionName("HttpTriggerVanilla1")]
         public static IActionResult Run([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)]HttpRequest req, TraceWriter log)
         {
             log.Info("C# HTTP trigger function processed a request.");
