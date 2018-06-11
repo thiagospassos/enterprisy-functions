@@ -1,5 +1,6 @@
 
 using System.IO;
+using AzureFunctions.Autofac;
 using BusinessLogic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
@@ -11,10 +12,14 @@ using Newtonsoft.Json;
 
 namespace EnterprisyFunctions
 {
+    [DependencyInjectionConfig(typeof(DiConfig))]
     public static class HttpTriggerVanilla1
     {
         [FunctionName("HttpTriggerVanilla1")]
-        public static IActionResult Run([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)]HttpRequest req, TraceWriter log)
+        public static IActionResult Run([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)]
+            HttpRequest req,
+            TraceWriter log,
+            [Inject] IServiceOne serviceOne)
         {
 
             log.Info("C# HTTP trigger function processed a request.");
@@ -31,7 +36,8 @@ namespace EnterprisyFunctions
                 ? (ActionResult)new OkObjectResult(new
                 {
                     name = name.CleanUp(),
-                    Environment = System.Environment.GetEnvironmentVariable("Environment")
+                    environment = System.Environment.GetEnvironmentVariable("Environment"),
+                    service = serviceOne.Execute(name)
                 })
                 : new BadRequestObjectResult("Please pass a name on the query string or in the request body");
         }
