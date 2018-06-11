@@ -28,7 +28,11 @@ namespace EnterprisyFunctions
 
 
             return name != null
-                ? (ActionResult)new OkObjectResult($"Hello, {name.CleanUp()}. Environment: {System.Environment.GetEnvironmentVariable("Environment")}")
+                ? (ActionResult)new OkObjectResult(new
+                {
+                    name = name.CleanUp(),
+                    Environment = System.Environment.GetEnvironmentVariable("Environment")
+                })
                 : new BadRequestObjectResult("Please pass a name on the query string or in the request body");
         }
     }
