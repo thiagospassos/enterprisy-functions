@@ -1,11 +1,13 @@
 
 using System.IO;
+using BusinessLogic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.WebJobs.Host;
 using Newtonsoft.Json;
+
 
 namespace EnterprisyFunctions
 {
@@ -23,7 +25,7 @@ namespace EnterprisyFunctions
             name = name ?? data?.name;
 
             return name != null
-                ? (ActionResult)new OkObjectResult($"Hello, {name}")
+                ? (ActionResult)new OkObjectResult($"Hello, {name.CleanUp()}")
                 : new BadRequestObjectResult("Please pass a name on the query string or in the request body");
         }
     }
