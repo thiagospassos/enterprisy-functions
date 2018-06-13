@@ -9,8 +9,8 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.WebJobs.Host;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Serilog;
 
 
 namespace EnterprisyFunctions
@@ -22,7 +22,7 @@ namespace EnterprisyFunctions
         public static IActionResult CrashAndLog([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)]
             HttpRequest req,
             [Inject] IMediator mediator,
-            [Inject] ILogger logger
+            ILogger logger
             )
         {
             var result = mediator.Send(new ServiceOne { Param1 = "Testing" }).GetAwaiter().GetResult();
@@ -32,8 +32,7 @@ namespace EnterprisyFunctions
             if (number == 3)
             {
                 logger
-                    .ForContext("Result", result, true)
-                    .Error("Randomly crashing");
+                    .LogError("Randomly crashing {@result}",result);
                 throw new Exception();
             }
             return new OkObjectResult(result);

@@ -7,8 +7,6 @@ In this talk, I cover a new paradigm or a new way of thinking of Azure Functions
 ### Features implemented
 * Configured dependency injection with Autofac
 * Configured Mediatr
-* Configured Serilog
-	* Including Sink to Application Insights
 
 
 ### Todo
