@@ -10,6 +10,7 @@ In this talk, I cover a new paradigm or a new way of thinking of Azure Functions
 * Added Unit Tests
 * Configured Security with Twitter
 	* Function Authorization is set to Anonymous
+	* Implementing EasyAuth
 
 ### Todo
 * Get ClaimsPrincipal.Current.Claims: currently not working out of the box

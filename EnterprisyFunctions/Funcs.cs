@@ -1,6 +1,5 @@
 
 using System;
-using System.Linq;
 using System.Security.Claims;
 using AzureFunctions.Autofac;
 using BusinessLogic;
@@ -27,6 +26,16 @@ namespace EnterprisyFunctions
         {
             var result = mediator.Send(new ServiceOne { Param1 = "Testing" }).GetAwaiter().GetResult();
 
+            AuthInfo auth = null;
+            try
+            {
+                auth = req.GetAuthInfoAsync().GetAwaiter().GetResult();
+            }
+            catch
+            {
+                //todo: nothing for now
+            }
+
             var rand = new Random();
             var number = rand.Next(5);
             if (number == 3)
@@ -37,8 +46,8 @@ namespace EnterprisyFunctions
             }
             return new OkObjectResult(new
             {
-                result
-                //,ClaimsPrincipal.Current.Claims
+                result,
+                auth
             });
         }
     }
