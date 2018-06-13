@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using MediatR;
 
 namespace BusinessLogic
 {
-    public class ServiceOne : IServiceOne
+    public class ServiceOne : IRequest<List<string>>
     {
-        public string Execute(string input)
-        {
-            return $"The Service One updated '{input}'";
-        }
+        public string Param1 { get; set; }
     }
 
-    public interface IServiceOne
+    public class ServiceOneHandler : IRequestHandler<ServiceOne, List<string>>
     {
-        string Execute(string input);
+        public Task<List<string>> Handle(ServiceOne request, CancellationToken cancellationToken)
+        {
+            var list = new List<string>() { "value 1", "value 2", "value 3", request.Param1 };
+            return Task.FromResult(list);
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System.IO;
 using AzureFunctions.Autofac;
 using BusinessLogic;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
@@ -19,27 +20,10 @@ namespace EnterprisyFunctions
         public static IActionResult Run([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)]
             HttpRequest req,
             TraceWriter log,
-            [Inject] IServiceOne serviceOne)
+            [Inject] IMediator mediator
+            )
         {
-
-            log.Info("C# HTTP trigger function processed a request.");
-
-            string name = req.Query["name"];
-
-            string requestBody = new StreamReader(req.Body).ReadToEnd();
-            dynamic data = JsonConvert.DeserializeObject(requestBody);
-            name = name ?? data?.name;
-
-
-
-            return name != null
-                ? (ActionResult)new OkObjectResult(new
-                {
-                    name = name.CleanUp(),
-                    environment = System.Environment.GetEnvironmentVariable("Environment"),
-                    service = serviceOne.Execute(name)
-                })
-                : new BadRequestObjectResult("Please pass a name on the query string or in the request body");
+            return new OkObjectResult(mediator.Send(new ServiceOne { Param1 = "Testing" }).GetAwaiter().GetResult());
         }
     }
 }
