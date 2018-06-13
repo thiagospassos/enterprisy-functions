@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.NetworkInformation;
-using System.Reflection;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Reflection;
 using Autofac;
 using AzureFunctions.Autofac;
 using BusinessLogic;
 using MediatR;
 using MediatR.Pipeline;
-using Serilog;
-using Serilog.Sinks.SystemConsole;
-using Serilog.Core;
 
 namespace EnterprisyFunctions
 {
