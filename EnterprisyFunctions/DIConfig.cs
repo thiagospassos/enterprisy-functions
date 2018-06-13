@@ -10,6 +10,9 @@ using AzureFunctions.Autofac;
 using BusinessLogic;
 using MediatR;
 using MediatR.Pipeline;
+using Serilog;
+using Serilog.Sinks.SystemConsole;
+using Serilog.Core;
 
 namespace EnterprisyFunctions
 {
@@ -47,6 +50,10 @@ namespace EnterprisyFunctions
                     var c = ctx.Resolve<IComponentContext>();
                     return t => c.Resolve(t);
                 });
+                Log.Logger = new LoggerConfiguration()
+                    .WriteTo.Console()
+                    .CreateLogger();
+                builder.Register(c => Log.Logger).As<ILogger>();
             });
         }
     }

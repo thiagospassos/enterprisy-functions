@@ -7,6 +7,8 @@
     <PackageReference Include="Autofac" Version="4.8.1" />
     <PackageReference Include="MediatR" Version="5.0.1" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.13" />
+    <PackageReference Include="Serilog" Version="2.7.1" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AzureFunctions.Autofac\AzureFunctions.Autofac.csproj" />
