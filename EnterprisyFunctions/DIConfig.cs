@@ -53,7 +53,7 @@ namespace EnterprisyFunctions
 
                 Log.Logger = new LoggerConfiguration()
                     .WriteTo.Console()
-                    .WriteTo.ApplicationInsightsEvents(Environment.GetEnvironmentVariable("APPINSIGHTS_INSTRUMENTATIONKEY"))
+                    .WriteTo.ApplicationInsightsTraces(Environment.GetEnvironmentVariable("APPINSIGHTS_INSTRUMENTATIONKEY"))
                     .CreateLogger();
 
                 builder.Register(c => Log.Logger).As<ILogger>();

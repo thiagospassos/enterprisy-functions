@@ -7,9 +7,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnterprisyFunctions", "Ente
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{0DADE5C0-1114-4115-92F5-DB8097233619}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic.Tests", "BusinessLogic.Tests\BusinessLogic.Tests.csproj", "{1C8A3256-9581-4B02-8C5A-99E74E2EB938}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogic.Tests", "BusinessLogic.Tests\BusinessLogic.Tests.csproj", "{1C8A3256-9581-4B02-8C5A-99E74E2EB938}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureFunctions.Autofac", "AzureFunctions.Autofac\AzureFunctions.Autofac.csproj", "{B0E01AC6-DD0D-4612-AA79-F9A0888439A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureFunctions.Autofac", "AzureFunctions.Autofac\AzureFunctions.Autofac.csproj", "{B0E01AC6-DD0D-4612-AA79-F9A0888439A2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A989C4D0-B771-44B8-BCF3-C8E0C130FD31}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
