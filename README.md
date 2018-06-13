@@ -8,7 +8,8 @@ In this talk, I cover a new paradigm or a new way of thinking of Azure Functions
 * Configured dependency injection with Autofac
 * Configured Mediatr
 * Added Unit Tests
-
+* Configured Security with Twitter
+	* Function Authorization is set to Anonymous
 
 ### Todo
-* Security
+* ???

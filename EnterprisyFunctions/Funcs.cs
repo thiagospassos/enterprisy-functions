@@ -1,5 +1,7 @@
 
 using System;
+using System.Linq;
+using System.Security.Claims;
 using AzureFunctions.Autofac;
 using BusinessLogic;
 using MediatR;
@@ -16,7 +18,7 @@ namespace EnterprisyFunctions
     public static class Funcs
     {
         [FunctionName("CrashAndLog")]
-        public static IActionResult CrashAndLog([HttpTrigger(AuthorizationLevel.User, "get", "post", Route = null)]
+        public static IActionResult CrashAndLog([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]
             HttpRequest req,
             [Inject] IMediator mediator,
             ILogger logger
@@ -32,7 +34,11 @@ namespace EnterprisyFunctions
                     .LogError("Randomly crashing {@result}",result);
                 throw new Exception();
             }
-            return new OkObjectResult(result);
+            return new OkObjectResult(new
+            {
+                result,
+                ClaimsPrincipal.Current.Claims
+            });
         }
     }
 }
