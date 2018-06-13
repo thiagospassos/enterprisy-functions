@@ -50,9 +50,12 @@ namespace EnterprisyFunctions
                     var c = ctx.Resolve<IComponentContext>();
                     return t => c.Resolve(t);
                 });
+
                 Log.Logger = new LoggerConfiguration()
                     .WriteTo.Console()
+                    .WriteTo.ApplicationInsightsEvents(Environment.GetEnvironmentVariable("APPINSIGHTS_INSTRUMENTATIONKEY"))
                     .CreateLogger();
+
                 builder.Register(c => Log.Logger).As<ILogger>();
             });
         }
