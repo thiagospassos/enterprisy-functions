@@ -19,7 +19,7 @@ namespace EnterprisyFunctions
     public static class Funcs
     {
         [FunctionName("CrashAndLog")]
-        public static IActionResult CrashAndLog([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)]
+        public static IActionResult CrashAndLog([HttpTrigger(AuthorizationLevel.User, "get", "post", Route = null)]
             HttpRequest req,
             [Inject] IMediator mediator,
             ILogger logger
