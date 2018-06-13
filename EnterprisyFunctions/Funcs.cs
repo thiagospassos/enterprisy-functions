@@ -5,6 +5,7 @@ using System.Security.Claims;
 using AzureFunctions.Autofac;
 using BusinessLogic;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
@@ -36,8 +37,8 @@ namespace EnterprisyFunctions
             }
             return new OkObjectResult(new
             {
-                result,
-                ClaimsPrincipal.Current.Claims
+                result
+                //,ClaimsPrincipal.Current.Claims
             });
         }
     }
