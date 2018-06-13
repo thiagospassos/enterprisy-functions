@@ -12,4 +12,4 @@ In this talk, I cover a new paradigm or a new way of thinking of Azure Functions
 	* Function Authorization is set to Anonymous
 
 ### Todo
-* ???
+* Get ClaimsPrincipal.Current.Claims: currently not working out of the box
