@@ -1,0 +1,11 @@
+{
+    "$schema": "http://json.schemastore.org/proxies",
+    "proxies": {
+        "ng-rest": {
+            "matchCondition": {
+                "route": "ng/{*rest}"
+            },
+            "backendUri": "https://enterprisy28a58.blob.core.windows.net/angular/AngularFunctions/{rest}"
+        }
+    }
+}
