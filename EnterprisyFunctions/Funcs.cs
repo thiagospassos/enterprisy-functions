@@ -24,7 +24,7 @@ namespace EnterprisyFunctions
             ILogger logger
             )
         {
-            var result = mediator.Send(new ServiceOne { Param1 = "Testing" }).GetAwaiter().GetResult();
+            var result = mediator.Send(new ServiceOne { Param1 = "From VSTS" }).GetAwaiter().GetResult();
 
             AuthInfo auth = null;
             try
