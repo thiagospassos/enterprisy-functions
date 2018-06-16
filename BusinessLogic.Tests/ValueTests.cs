@@ -5,13 +5,13 @@ using MediatR;
 using MediatR.Pipeline;
 using Xunit;
 
-namespace BusinessLogic.Tests
+namespace Application.Tests
 {
-    public class UnitTest1
+    public class ValueTests
     {
         private readonly IMediator _mediator;
 
-        public UnitTest1()
+        public ValueTests()
         {
             var builder = new ContainerBuilder();
             builder.RegisterAssemblyTypes(typeof(IMediator).GetTypeInfo().Assembly).AsImplementedInterfaces();
@@ -24,7 +24,7 @@ namespace BusinessLogic.Tests
             foreach (var mediatrOpenType in mediatrOpenTypes)
             {
                 builder
-                    .RegisterAssemblyTypes(typeof(ServiceOne).GetTypeInfo().Assembly)
+                    .RegisterAssemblyTypes(typeof(Application.Values.AddValueToArrayCommand).GetTypeInfo().Assembly)
                     .AsClosedTypesOf(mediatrOpenType)
                     .AsImplementedInterfaces();
             }
@@ -47,14 +47,14 @@ namespace BusinessLogic.Tests
         [Fact]
         public void ShouldCleanUp()
         {
-            Assert.Equal("thiagosobraldospassos","Thiago Sobral dos Passos".CleanUp());
-            Assert.Equal("thiagopassos","Thiago Passos".CleanUp());
+            Assert.Equal("thiagosobraldospassos", "Thiago Sobral dos Passos".CleanUp());
+            Assert.Equal("thiagopassos", "Thiago Passos".CleanUp());
         }
 
         [Fact]
         public async Task ShouldReturn4Values()
         {
-            var result = await _mediator.Send(new ServiceOne() {Param1 = "Forth Value"});
+            var result = await _mediator.Send(new Values.AddValueToArrayCommand() { Value = "Forth Value" });
 
             Assert.Equal(4, result.Count);
         }

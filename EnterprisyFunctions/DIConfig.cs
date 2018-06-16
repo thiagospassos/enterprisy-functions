@@ -1,7 +1,8 @@
 ﻿using System.Reflection;
+using Application;
+using Application.Values;
 using Autofac;
 using AzureFunctions.Autofac;
-using BusinessLogic;
 using MediatR;
 using MediatR.Pipeline;
 
@@ -23,7 +24,7 @@ namespace EnterprisyFunctions
                 foreach (var mediatrOpenType in mediatrOpenTypes)
                 {
                     builder
-                        .RegisterAssemblyTypes(typeof(ServiceOne).GetTypeInfo().Assembly)
+                        .RegisterAssemblyTypes(typeof(AddValueToArrayCommand).GetTypeInfo().Assembly)
                         .AsClosedTypesOf(mediatrOpenType)
                         .AsImplementedInterfaces();
                 }

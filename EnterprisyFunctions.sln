@@ -5,9 +5,9 @@ VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnterprisyFunctions", "EnterprisyFunctions\EnterprisyFunctions.csproj", "{82D24B98-9C08-4B43-AEF7-40D601C2D405}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{0DADE5C0-1114-4115-92F5-DB8097233619}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "BusinessLogic\Application.csproj", "{0DADE5C0-1114-4115-92F5-DB8097233619}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogic.Tests", "BusinessLogic.Tests\BusinessLogic.Tests.csproj", "{1C8A3256-9581-4B02-8C5A-99E74E2EB938}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Tests", "BusinessLogic.Tests\Application.Tests.csproj", "{1C8A3256-9581-4B02-8C5A-99E74E2EB938}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureFunctions.Autofac", "AzureFunctions.Autofac\AzureFunctions.Autofac.csproj", "{B0E01AC6-DD0D-4612-AA79-F9A0888439A2}"
 EndProject
@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Helpers", "Helpers", "{70A9BF54-24FC-468F-BC27-D9C07E68CE8C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B0E01AC6-DD0D-4612-AA79-F9A0888439A2} = {70A9BF54-24FC-468F-BC27-D9C07E68CE8C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {809EB4BA-458A-4DBA-8367-F50AFE08137F}
