@@ -4,6 +4,7 @@
     Welcome to {{ title }}!
   </h1>
 </div>
+<button (click)="changeSort()">{{sort==1?'Decending':'Ascending'}}</button>
 <p>
 {{result|json}}
 </p>
