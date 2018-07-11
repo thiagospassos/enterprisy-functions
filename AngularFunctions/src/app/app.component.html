@@ -5,9 +5,7 @@
   </h1>
 </div>
 <button (click)="changeSort()">{{sort==1?'Decending':'Ascending'}}</button>
-<p>
-{{result|json}}
-</p>
+<p *ngFor="let str of result">{{str}}</p>
 <p style="color:red;">
   {{error|json}}
 </p>

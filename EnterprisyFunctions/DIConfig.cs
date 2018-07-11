@@ -45,6 +45,4 @@ namespace EnterprisyFunctions
             });
         }
     }
-
-
 }

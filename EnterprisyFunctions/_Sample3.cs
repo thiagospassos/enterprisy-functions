@@ -20,7 +20,7 @@ using Newtonsoft.Json;
 namespace EnterprisyFunctions
 {
     [DependencyInjectionConfig(typeof(DiConfig))]
-    public static class Funcs
+    public static class Sample3
     {
         [FunctionName("Values")]
         public static async Task<IActionResult> Values(

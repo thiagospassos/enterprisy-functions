@@ -23,9 +23,11 @@ export class AppComponent implements OnInit {
   }
 
   get() {
-    this.http.get(`/api/Values?sort=${this.sort}`).subscribe(result => {
+    this.http.get(`http://localhost:7071/api/Values?sort=${this.sort}`).subscribe(result => {
+      console.log(result);
       this.result = result;
     }, error => {
+      console.log(error);
       this.error = error;
     })
   }
