@@ -12,7 +12,7 @@ namespace EnterprisyFunctions
     {
         [FunctionName("Timer")]
         public static void Run(
-            [TimerTrigger("0 0 0 0 * *")]TimerInfo myTimer,
+            [TimerTrigger("0 0 */2 * * *")]TimerInfo myTimer,
             TraceWriter log,
             [Inject] IGiveMeSomeValuesQuery query)
         {
