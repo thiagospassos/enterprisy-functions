@@ -7,7 +7,7 @@ using Microsoft.Azure.WebJobs.Host;
 
 namespace EnterprisyFunctions
 {
-    [DependencyInjectionConfig(typeof(DiConfigSimple))]
+    [DependencyInjectionConfig(typeof(DiConfig))]
     public static class Sample4
     {
         [FunctionName("Timer")]

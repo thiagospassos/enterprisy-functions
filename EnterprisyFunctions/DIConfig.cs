@@ -14,6 +14,9 @@ namespace EnterprisyFunctions
         {
             DependencyInjection.Initialize(builder =>
             {
+                builder.RegisterAssemblyTypes(typeof(AddValueToArrayCommand).GetTypeInfo().Assembly)
+                    .AsImplementedInterfaces();
+
                 builder.RegisterAssemblyTypes(typeof(IMediator).GetTypeInfo().Assembly).AsImplementedInterfaces();
                 var mediatrOpenTypes = new[]
                 {

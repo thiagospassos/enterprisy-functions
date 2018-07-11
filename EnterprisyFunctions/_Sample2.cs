@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace EnterprisyFunctions
 {
-    [DependencyInjectionConfig(typeof(DiConfigSimple))]
+    [DependencyInjectionConfig(typeof(DiConfig))]
     public static class Sample2
     {
         [FunctionName("Sample2")]
