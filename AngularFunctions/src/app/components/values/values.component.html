@@ -1,0 +1,12 @@
+<ul class="list-group">
+  <li class="list-group-item">
+    <button (click)="changeSort()" class="btn btn-primary btn-sm pull-right">
+      <i class="fa fa-arrow-up" *ngIf="sort"></i>
+      <i class="fa fa-arrow-down" *ngIf="!sort"></i>
+    </button>
+  </li>
+  <li class="list-group-item" *ngFor="let str of result">{{str}}</li>
+</ul>
+<div class="alert alert-danger" role="alert" *ngIf="error">
+  {{error|json}}
+</div>
