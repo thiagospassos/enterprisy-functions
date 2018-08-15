@@ -21,10 +21,12 @@ import { ValuesComponent } from './components/values/values.component';
     RouterModule.forRoot([
       {
         path: '', component: MainComponent, children: [
-          { path: '', component: HomeComponent, pathMatch: 'full' },
+          { path: '', redirectTo: 'home', pathMatch: 'full' },
+          { path: 'home', component: HomeComponent },
           { path: 'values', component: ValuesComponent }
         ]
-      }
+      },
+      { path: '**', redirectTo: '/home' }
     ])
   ],
   providers: [],
