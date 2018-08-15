@@ -4,6 +4,7 @@ using System.IO;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Application;
+using Application.Person;
 using Application.Values;
 using AzureFunctions.Autofac;
 using MediatR;
@@ -19,30 +20,17 @@ using Newtonsoft.Json;
 
 namespace EnterprisyFunctions
 {
-    [DependencyInjectionConfig(typeof(DiConfig))]
-    public static class Sample3
+    public static partial class Functions
     {
-        [FunctionName("Values")]
-        public static async Task<IActionResult> Values(
+        [FunctionName(nameof(GetPeople))]
+        public static async Task<IActionResult> GetPeople(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]
             HttpRequest req,
-            [Inject] IMediator mediator,
+            [Inject] IGetPeopleQuery query,
             ILogger logger
             )
         {
-            if (req.Method == "GET")
-            {
-                var sort = SortOrder.Ascending;
-                Enum.TryParse(req.Query["sort"], true, out sort);
-                return new OkObjectResult(await mediator.Send(new AllValuesQuery { SortOrder = sort }));
-            }
-            if (req.Method == "POST")
-            {
-                string requestBody = new StreamReader(req.Body).ReadToEnd();
-                dynamic data = JsonConvert.DeserializeObject(requestBody);
-                return new OkObjectResult(await mediator.Send(new AddValueToArrayCommand { Value = data?.value }));
-            }
-            return new BadRequestObjectResult("Invalid Method");
+            return new OkObjectResult(await query.Execute());
         }
     }
 }

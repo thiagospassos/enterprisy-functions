@@ -1,5 +1,7 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
+using Application.Person;
 using Application.Values;
 using AzureFunctions.Autofac;
 using Microsoft.Azure.WebJobs;
@@ -7,19 +9,16 @@ using Microsoft.Azure.WebJobs.Host;
 
 namespace EnterprisyFunctions
 {
-    [DependencyInjectionConfig(typeof(DiConfig))]
-    public static class Sample4
+    public static partial class Functions
     {
-        [FunctionName("Timer")]
-        public static void Run(
-            [TimerTrigger("0 0 */2 * * *")]TimerInfo myTimer,
+        [FunctionName(nameof(RandomlyAddingPeople))]
+        public static async Task RandomlyAddingPeople(
+            [TimerTrigger("0 0 0 * * *")]TimerInfo myTimer,
             TraceWriter log,
-            [Inject] IGiveMeSomeValuesQuery query)
+            [Inject] IAddRandomPersonCommand cmd)
         {
-            var values = query.Execute(SortOrder.Ascending).ToList();
-            var r = new Random();
-            var index = r.Next(0, values.Count - 1);
-            log.Info($"Picked value this time was: {values[index]}, index: {index}");
+            var person = await cmd.Execute();
+            log.Warning($"Person added was: {person.FirstName} {person.LastName}");
         }
     }
 }

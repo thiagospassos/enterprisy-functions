@@ -1,10 +1,12 @@
-﻿using System.Reflection;
-using Application;
+﻿using System;
+using System.Reflection;
 using Application.Values;
 using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using AzureFunctions.Autofac;
-using MediatR;
-using MediatR.Pipeline;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Persistence;
 
 namespace EnterprisyFunctions
 {
@@ -14,38 +16,22 @@ namespace EnterprisyFunctions
         {
             DependencyInjection.Initialize(builder =>
             {
-                builder.RegisterAssemblyTypes(typeof(AddValueToArrayCommand).GetTypeInfo().Assembly)
-                    .AsImplementedInterfaces();
+                builder.RegisterAssemblyTypes(typeof(GiveMeSomeValuesQuery).GetTypeInfo().Assembly)
+                .Where(x => x.Name.EndsWith("Command") || x.Name.EndsWith("Query"))
+                .AsImplementedInterfaces();
 
-                builder.RegisterAssemblyTypes(typeof(IMediator).GetTypeInfo().Assembly).AsImplementedInterfaces();
-                var mediatrOpenTypes = new[]
-                {
-                    typeof(IRequestHandler<,>),
-                    typeof(INotificationHandler<>),
-                };
+                builder.RegisterType<FunctionsDbInitializer>().AsSelf();
 
-                foreach (var mediatrOpenType in mediatrOpenTypes)
-                {
-                    builder
-                        .RegisterAssemblyTypes(typeof(AddValueToArrayCommand).GetTypeInfo().Assembly)
-                        .AsClosedTypesOf(mediatrOpenType)
-                        .AsImplementedInterfaces();
-                }
-                // It appears Autofac returns the last registered types first
-                builder.RegisterGeneric(typeof(RequestPostProcessorBehavior<,>)).As(typeof(IPipelineBehavior<,>));
-                builder.RegisterGeneric(typeof(RequestPreProcessorBehavior<,>)).As(typeof(IPipelineBehavior<,>));
-                //builder.RegisterGeneric(typeof(GenericRequestPreProcessor<>)).As(typeof(IRequestPreProcessor<>));
-                //builder.RegisterGeneric(typeof(GenericRequestPostProcessor<,>)).As(typeof(IRequestPostProcessor<,>));
-                //builder.RegisterGeneric(typeof(GenericPipelineBehavior<,>)).As(typeof(IPipelineBehavior<,>));
-                //builder.RegisterGeneric(typeof(ConstrainedRequestPostProcessor<,>)).As(typeof(IRequestPostProcessor<,>));
-                //builder.RegisterGeneric(typeof(ConstrainedPingedHandler<>)).As(typeof(INotificationHandler<>));
+                var serviceCollection = new ServiceCollection();
 
-                builder.Register<ServiceFactory>(ctx =>
-                {
-                    var c = ctx.Resolve<IComponentContext>();
-                    return t => c.Resolve(t);
-                });
+                serviceCollection.AddDbContext<FunctionsDbContext>(options => options
+                    .UseInMemoryDatabase(Guid.NewGuid().ToString()), ServiceLifetime.Transient);
+
+                builder.Populate(serviceCollection);
             });
+
+            var functionsDbInitializer = DependencyInjection.Resolve(typeof(FunctionsDbInitializer), "") as FunctionsDbInitializer;
+            functionsDbInitializer?.Initialize();
         }
     }
 }

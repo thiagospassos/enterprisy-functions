@@ -32,6 +32,12 @@ namespace Application.Values
         }
     }
 
+    public enum SortOrder
+    {
+        Ascending,
+        Descending
+    }
+
     public interface IGiveMeSomeValuesQuery
     {
         IEnumerable<string> Execute(SortOrder order);

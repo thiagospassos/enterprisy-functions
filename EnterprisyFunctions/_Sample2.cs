@@ -10,10 +10,10 @@ using Microsoft.Extensions.Logging;
 namespace EnterprisyFunctions
 {
     [DependencyInjectionConfig(typeof(DiConfig))]
-    public static class Sample2
+    public static partial class Functions
     {
-        [FunctionName("Sample2")]
-        public static IActionResult EndPoint(
+        [FunctionName(nameof(Sample2))]
+        public static IActionResult Sample2(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Sample2/{order:int}")]
             HttpRequest req,
             ILogger logger,

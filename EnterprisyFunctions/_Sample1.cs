@@ -8,15 +8,15 @@ using Microsoft.Extensions.Logging;
 
 namespace EnterprisyFunctions
 {
-    public static class Sample1
+    public static partial class Functions
     {
-        [FunctionName("Sample1")]
-        public static IActionResult EndPoint(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)]
-            HttpRequest req,
+        [FunctionName(nameof(Sample1))]
+        public static IActionResult Sample1(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req,
             ILogger logger
             )
         {
+            logger.LogInformation("Test");
             string[] array = { "Value 1", "Value 2", "Value 3" };
             return new OkObjectResult(array);
         }
